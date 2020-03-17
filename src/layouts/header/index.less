@@ -1,0 +1,60 @@
+.headerBox {
+  padding: 0 32px;
+  z-index: 10;
+  border-bottom: 1px solid #6ca4d1;
+  width: 100%;
+  background: url("/assets/image/headerbg.png") no-repeat;
+  background-size: 100% 100%;
+  color: #ffffff;
+  .headerTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .logoAndNameBox {
+      height: 60px;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      .systemLogo {
+        width: 103px;
+        height: 30px;
+      }
+      .systemName {
+        padding: 6px 0 0 15px;
+      }
+    }
+    .loginAndRegister {
+      a {
+        color: #ffffff;
+        opacity: 0.9;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  .headerMenu {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    padding-left: 10px;
+    .preMenu {
+      height: 50px;
+      color: #ffffff;
+      opacity: 0.9;
+      margin-right: 62px;
+      padding-top: 14px;
+    }
+    .preMenu:hover {
+      border-bottom: 2px solid #ffffff;
+    }
+    .selectedStyle {
+      border-bottom: 2px solid #ffffff;
+    }
+  }
+}
+
+.otherHeaderBox {
+  box-shadow: 0 2px 8px #f0f1f2;
+  border-bottom: none;
+}
