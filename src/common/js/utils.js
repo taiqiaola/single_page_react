@@ -1,8 +1,24 @@
 /**
  * @Author niukai
  * @date 2020.3.17
- * @description 通用方法文件
+ * @description 通用方法配置文件
  */
+
+/**
+ * @description 拼接body
+ */
+export function params(options) {
+  var arr = [];
+  for (var key in options) {
+    var value = options[key];
+    if (Object.prototype.toString.call(value) === "[object Array]" || Object.prototype.toString.call(value) === "[object Object]") {
+      arr.push(key + "=" + encodeURIComponent(JSON.stringify(value)));
+      continue;
+    }
+    arr.push(key + "=" + encodeURIComponent(value));
+  }
+  return arr.join("&");
+}
 
 /**
  * @Author niukai

@@ -1,9 +1,18 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import { Form, Input, Button, Checkbox } from "antd";
 import "./index.less";
 
+import * as actions from "./action";
+import * as LoginReducer from "./reducer";
+
 class Login extends Component {
+  onLogin = () => {
+    this.props.setLoginState(true);
+    this.props.history.push("/");
+  };
+
   render() {
     return (
       <div className="loginBox">
@@ -39,7 +48,7 @@ class Login extends Component {
             </Form.Item>
 
             <Form.Item>
-              <Button type="primary" htmlType="submit" className="login-form-button">
+              <Button type="primary" className="login-form-button" onClick={this.onLogin}>
                 登录
               </Button>
               {/* Or <a href="">register now!</a> */}
@@ -51,4 +60,6 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect(null, actions)(Login);
+
+export { actions, LoginReducer };

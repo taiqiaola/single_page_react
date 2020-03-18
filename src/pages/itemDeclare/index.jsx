@@ -1,12 +1,11 @@
 import React, { Component } from "react";
+import { HeaderTemplate } from "@/layouts";
 import "./index.less";
-import { Header } from "@/layouts";
 
 class ItemDeclare extends Component {
   render() {
     return (
-      <div className="itemDeclareBox">
-        <Header />
+      <HeaderTemplate>
         <p>ItemDeclare</p>
         <p>ItemDeclare</p>
         <p>ItemDeclare</p>
@@ -36,7 +35,7 @@ class ItemDeclare extends Component {
         <p>ItemDeclare</p>
         <p>ItemDeclare</p>
         <p>ItemDeclare</p>
-      </div>
+      </HeaderTemplate>
     );
   }
 }

@@ -4,6 +4,8 @@ import "./index.less";
 import { Affix } from "antd";
 import { getRedirectPath } from "@/common/js/utils";
 
+const RedirectTo404 = ({ location }) => <Redirect to={Object.assign({}, location, { state: { is404: true } })} />;
+
 export default function Template(props) {
   const { match, routerConfig } = props;
   const [leftMenu, rightContent] = [[], []];
@@ -19,13 +21,14 @@ export default function Template(props) {
   }
 
   return (
-    <div className="page">
+    <div className="leftMenuTemplateBox">
       <Affix offsetTop={0}>
         <nav className="leftMenuBox">{leftMenu}</nav>
       </Affix>
       <Switch>
         <Redirect exact from={match.path} to={`${match.path}${getRedirectPath(routerConfig)}`} />
         {rightContent}
+        <Route component={RedirectTo404} />
       </Switch>
     </div>
   );

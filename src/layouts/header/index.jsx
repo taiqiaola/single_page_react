@@ -2,17 +2,18 @@
  *  菜单栏
  */
 import React, { Component } from "react";
-import "./index.less";
 import { NavLink, Link } from "react-router-dom";
-import { menuConfig } from "@/common/js/menu";
-import { Divider } from "antd";
 import classNames from "classnames";
+import { Divider } from "antd";
+import { menuConfig } from "@/common/js/menu";
+import "./index.less";
 
 function Header(props) {
   const cls = classNames({
     headerBox: true,
-    otherHeaderBox: !props.notLoadOtherStyle
+    otherHeaderBox: !props.noOtherStyle
   });
+
   return (
     <div className={cls}>
       <div className="headerTop">

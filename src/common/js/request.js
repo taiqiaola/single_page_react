@@ -4,7 +4,7 @@
  * @description 请求
  */
 
-import { params } from "./utils.js";
+import { params } from "./utils";
 import { message } from "antd";
 
 const defaultTimeout = 300000;
