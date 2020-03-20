@@ -26,8 +26,6 @@ class AppRoutes extends Component {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    console.log(this.props);
-    console.log(nextProps);
     if (this.props.location.pathname !== nextProps.location.pathname && ["/login", "/register"].indexOf(nextProps.location.pathname) < 0) {
       window.scrollTo(0, 0);
       this.loadingShow();

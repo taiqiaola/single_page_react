@@ -94,13 +94,69 @@ class Home extends Component {
       }
     ];
 
+    const wantDeclareMenu = [
+      {
+        name: "立项用地规划许可阶段",
+        img: "/assets/image/lxyd.png",
+        key: "lxyd",
+        children: [
+          { name: "政府投资项目", key: "zf" },
+          { name: "社会投资项目", key: "sh" }
+        ]
+      },
+      {
+        name: "工程建设许可阶段",
+        img: "/assets/image/gcjs.png",
+        key: "gcjs",
+        children: [
+          { name: "政府投资项目", key: "zf" },
+          { name: "社会投资项目", key: "sh" }
+        ]
+      },
+      {
+        name: "施工许可阶段",
+        img: "/assets/image/sg.png",
+        key: "sg",
+        children: [
+          { name: "政府投资项目", key: "zf" },
+          { name: "社会投资项目", key: "sh" }
+        ]
+      },
+      {
+        name: "竣工验收阶段",
+        img: "/assets/image/jg.png",
+        key: "jg",
+        children: [
+          { name: "政府投资项目", key: "zf" },
+          { name: "社会投资项目", key: "sh" }
+        ]
+      }
+    ];
+
     return (
       <HeaderTemplate noOtherStyle={true}>
-        <div className="declareBox">
-          <div className="declareTopBox">
+        <div className="wantDeclareBox">
+          <div className="wantDeclareTopBox">
             <div className="grad1"></div>
             <div className="txt">我要申报</div>
             <div className="grad2"></div>
+          </div>
+          <div className="wantDeclareArea">
+            {wantDeclareMenu.map(item => (
+              <div key={item.key} className="declareCard">
+                <img alt="declareImg" src={item.img} />
+                <div className="declareCardTxt">
+                  <p>{item.name}</p>
+                  <div className="preTxt">
+                    {item.children.map(i => (
+                      <Link key={`${item.key}_${i.key}`} to="/">
+                        {i.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
         <div className="myDeclarebox">
@@ -109,37 +165,35 @@ class Home extends Component {
             <div className="txt">我的申报</div>
             <div className="grad2"></div>
           </div>
-          <div>
-            {loginState ? (
-              <Table
-                columns={columns}
-                loading={tableLoading || !listData}
-                rowKey={record => record.itemNumber}
-                dataSource={listData.list}
-                locale={{
-                  emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
-                }}
-                pagination={{
-                  size: "small",
-                  defaultCurrent: 1,
-                  current: listData.page,
-                  total: listData.total,
-                  pageSize: PAGESIZE,
-                  showQuickJumper: true,
-                  onChange: page => {
-                    this.onPageChangeHandle(page);
-                  },
-                  showTotal: total => {
-                    return `共${total}条`;
-                  }
-                }}
-              />
-            ) : (
-              <span>
-                <Link to="/login">登录</Link> 后查看
-              </span>
-            )}
-          </div>
+          {loginState ? (
+            <Table
+              columns={columns}
+              loading={tableLoading || !listData}
+              rowKey={record => record.itemNumber}
+              dataSource={listData.list}
+              locale={{
+                emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+              }}
+              pagination={{
+                size: "small",
+                defaultCurrent: 1,
+                current: listData.page,
+                total: listData.total,
+                pageSize: PAGESIZE,
+                showQuickJumper: true,
+                onChange: page => {
+                  this.onPageChangeHandle(page);
+                },
+                showTotal: total => {
+                  return `共${total}条`;
+                }
+              }}
+            />
+          ) : (
+            <span>
+              <Link to="/login">登录</Link> 后查看
+            </span>
+          )}
         </div>
       </HeaderTemplate>
     );

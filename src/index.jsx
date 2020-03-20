@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { createStore, applyMiddleware } from "redux";
 import ReduxThunk from "redux-thunk";
 import { Provider } from "react-redux";
-import rootReducer from "./reduxs/reducers/reducer";
+import rootReducer from "./reduxs/reducer";
 import zh_CN from "antd/lib/locale-provider/zh_CN";
 import "moment/locale/zh-cn";
 import { ConfigProvider } from "antd";

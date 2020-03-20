@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Form, Input, Button, Checkbox } from "antd";
+import * as actions from "@/reduxs/action.js";
 import "./index.less";
-
-import * as actions from "./action";
-import * as LoginReducer from "./reducer";
 
 class Login extends Component {
   onLogin = () => {
@@ -61,5 +59,3 @@ class Login extends Component {
 }
 
 export default connect(null, actions)(Login);
-
-export { actions, LoginReducer };
