@@ -1,8 +1,11 @@
 import React from "react";
 import { Switch, Route, NavLink, Redirect } from "react-router-dom";
 import "./index.less";
-import { Affix } from "antd";
+import { Affix, Layout } from "antd";
 import { getRedirectPath } from "@/common/js/utils";
+import Footer from "@/layouts/footer";
+
+const { Sider, Content } = Layout;
 
 const RedirectTo404 = ({ location }) => <Redirect to={Object.assign({}, location, { state: { is404: true } })} />;
 
@@ -21,15 +24,20 @@ export default function Template(props) {
   }
 
   return (
-    <div className="leftMenuTemplateBox">
-      <Affix offsetTop={0}>
-        <nav className="leftMenuBox">{leftMenu}</nav>
-      </Affix>
-      <Switch>
-        <Redirect exact from={match.path} to={`${match.path}${getRedirectPath(routerConfig)}`} />
-        {rightContent}
-        <Route component={RedirectTo404} />
-      </Switch>
-    </div>
+    <Layout className="leftMenuTemplateBox">
+      <Sider className="leftMenuSider" width={160}>
+        <Affix offsetTop={0}>
+          <nav className="leftMenuBox">{leftMenu}</nav>
+        </Affix>
+      </Sider>
+      <Content style={{ flex: 1 }}>
+        <Switch>
+          <Redirect exact from={match.path} to={`${match.path}${getRedirectPath(routerConfig)}`} />
+          {rightContent}
+          <Route component={RedirectTo404} />
+        </Switch>
+        <Footer />
+      </Content>
+    </Layout>
   );
 }

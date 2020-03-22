@@ -9,3 +9,71 @@
 #root {
   height: 100%;
 }
+
+// 全局Button样式
+.ant-btn {
+  margin-right: 8px;
+}
+.ant-btn:last-child {
+  margin-right: 0;
+}
+
+// 全局Modal样式
+.@{dialog-prefix-cls} {
+  &-header {
+  }
+
+  &-title {
+  }
+
+  &-close {
+  }
+
+  &-content {
+  }
+
+  &-footer {
+    .ant-btn {
+      margin-left: 0;
+    }
+  }
+
+  &-body {
+    max-height: 700px;
+    overflow-y: auto;
+  }
+}
+
+// modal框的标题为tabs时的样式
+.modalTitleForTabs {
+  .ant-modal-header {
+    padding: 15px 0 0 0;
+    border-bottom: 0;
+    .ant-tabs-bar {
+      margin: 0;
+      padding: 0 24px;
+      transition: none;
+      .ant-tabs-nav-container {
+        font-size: 16px;
+      }
+    }
+    .ant-tabs-nav .ant-tabs-tab {
+      margin: 0;
+      padding: 0 0 16px 0;
+      margin-right: 32px;
+    }
+    .ant-tabs-nav .ant-tabs-tab-active {
+      padding: 0 0 16px 0;
+    }
+    .ant-tabs-nav .ant-tabs-tab:last-child {
+      padding: 0 0 16px 0;
+    }
+  }
+  .ant-modal-content {
+    .ant-modal-footer {
+      .ant-btn {
+        transition: none;
+      }
+    }
+  }
+}

@@ -24,6 +24,12 @@ class ReceiveLetter extends Component {
         <h1>窗口收件</h1>
         <h1>窗口收件</h1>
         <h1>窗口收件</h1>
+        <h1>窗口收件</h1>
+        <h1>窗口收件</h1>
+        <h1>窗口收件</h1>
+        <h1>窗口收件</h1>
+        <h1>窗口收件</h1>
+        <h1>窗口收件</h1>
       </div>
     );
   }

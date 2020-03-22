@@ -6,7 +6,7 @@ import "./index.less";
 class ProjectManage extends Component {
   render() {
     return (
-      <HeaderTemplate>
+      <HeaderTemplate hasLeft={true}>
         <LeftMenuTemplate routerConfig={routerConfig} {...this.props} />
       </HeaderTemplate>
     );

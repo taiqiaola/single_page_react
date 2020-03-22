@@ -1,17 +1,25 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { Table, message, Empty } from "antd";
+import { Tabs, message, Button, Modal } from "antd";
 import { HeaderTemplate } from "@/layouts";
 import { getTodoWoList, getLoginUser } from "@/service/common";
 import { USER_SUCCESS, PAGESIZE } from "@/common/js/config";
+import { GlobalTable } from "@/pages/components";
+import { PlusOutlined } from "@ant-design/icons";
+import classNames from "classnames";
 import "./index.less";
+
+const { TabPane } = Tabs;
 
 class Home extends Component {
   state = {
     listData: {},
     currentName: "",
-    tableLoading: false
+    updateState: false,
+    tableLoading: false,
+    tabActivelKey: "proInfo",
+    lookHistoryVisible: false
   };
 
   UNSAFE_componentWillMount() {
@@ -47,12 +55,48 @@ class Home extends Component {
     });
   }
 
-  onPageChangeHandle(page) {
+  onPageChangeHandle = page => {
     this.queryTodoWoList(page);
-  }
+  };
+
+  onSearchHandle = () => {};
+
+  onAddHandle = () => {};
+
+  onLookHistoryHandle = () => {
+    this.setState({
+      lookHistoryVisible: true
+    });
+  };
+
+  onModalCancleHandle = () => {
+    this.setState({
+      updateState: false,
+      tabActivelKey: "proInfo",
+      lookHistoryVisible: false
+    });
+  };
+
+  onUpdateHandle = () => {
+    this.setState({
+      updateState: true
+    });
+  };
+
+  onTabChangeHandle = key => {
+    this.setState({
+      tabActivelKey: key
+    });
+  };
+
+  onBackHandle = () => {
+    this.setState({
+      updateState: false
+    });
+  };
 
   render() {
-    const { listData, currentName, tableLoading } = this.state;
+    const { listData, currentName, tableLoading, lookHistoryVisible, updateState, tabActivelKey } = this.state;
     const { loginState } = this.props;
 
     const columns = [
@@ -87,10 +131,10 @@ class Home extends Component {
         width: "20%"
       },
       {
-        title: "当前步骤",
-        dataIndex: "tacheName",
-        key: "tacheName",
-        width: "10%"
+        title: "历史版本",
+        key: "action",
+        width: "10%",
+        render: (text, record) => <a onClick={this.onLookHistoryHandle}>查看</a>
       }
     ];
 
@@ -133,6 +177,10 @@ class Home extends Component {
       }
     ];
 
+    const cls = classNames({
+      modalTitleForTabs: updateState
+    });
+
     return (
       <HeaderTemplate noOtherStyle={true}>
         <div className="wantDeclareBox">
@@ -144,7 +192,7 @@ class Home extends Component {
           <div className="wantDeclareArea">
             {wantDeclareMenu.map(item => (
               <div key={item.key} className="declareCard">
-                <img alt="declareImg" src={item.img} />
+                <div className="declareImg" style={{ backgroundImage: `url(${item.img})` }} />
                 <div className="declareCardTxt">
                   <p>{item.name}</p>
                   <div className="preTxt">
@@ -166,28 +214,17 @@ class Home extends Component {
             <div className="grad2"></div>
           </div>
           {loginState ? (
-            <Table
+            <GlobalTable
               columns={columns}
-              loading={tableLoading || !listData}
-              rowKey={record => record.itemNumber}
-              dataSource={listData.list}
-              locale={{
-                emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
-              }}
-              pagination={{
-                size: "small",
-                defaultCurrent: 1,
-                current: listData.page,
-                total: listData.total,
-                pageSize: PAGESIZE,
-                showQuickJumper: true,
-                onChange: page => {
-                  this.onPageChangeHandle(page);
-                },
-                showTotal: total => {
-                  return `共${total}条`;
-                }
-              }}
+              tableData={listData}
+              tableLoading={tableLoading}
+              onSearch={this.onSearchHandle}
+              onPageChange={this.onPageChangeHandle}
+              // extraFunc={
+              //   <Button type="primary" icon={<PlusOutlined />} onClick={this.onAddHandle}>
+              //     新建项目
+              //   </Button>
+              // }
             />
           ) : (
             <span>
@@ -195,6 +232,45 @@ class Home extends Component {
             </span>
           )}
         </div>
+
+        <Modal
+          title={
+            updateState ? (
+              <Tabs animated={false} activeKey={tabActivelKey} onChange={this.onTabChangeHandle}>
+                <TabPane tab="项目信息" key="proInfo" />
+                <TabPane tab="附件资料" key="fileInfo" />
+              </Tabs>
+            ) : (
+              "历史版本"
+            )
+          }
+          width={1200}
+          wrapClassName={cls}
+          maskClosable={false}
+          visible={lookHistoryVisible}
+          onCancel={this.onModalCancleHandle}
+          footer={
+            updateState
+              ? [
+                  <Button key="close" onClick={this.onModalCancleHandle}>
+                    关闭
+                  </Button>,
+                  <Button key="back" type="primary" onClick={this.onBackHandle}>
+                    返回
+                  </Button>
+                ]
+              : [
+                  <Button key="close" onClick={this.onModalCancleHandle}>
+                    关闭
+                  </Button>,
+                  <Button key="update" type="primary" onClick={this.onUpdateHandle}>
+                    修改
+                  </Button>
+                ]
+          }
+        >
+          {updateState ? (tabActivelKey === "proInfo" ? "proInfo" : "fileInfo") : "history"}
+        </Modal>
       </HeaderTemplate>
     );
   }

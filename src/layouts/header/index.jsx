@@ -26,7 +26,7 @@ class Header extends Component {
 
     const UserInfo = () => (
       <div className="userInfoBox">
-        <Dropdown overlay={userMenu}>
+        <Dropdown overlay={userMenu} overlayClassName="dropDownBox">
           <img alt="logo" className="userImg" src="/assets/image/userimg.png" />
         </Dropdown>
         你好，王晓旭
@@ -36,7 +36,7 @@ class Header extends Component {
     const userMenu = (
       <Menu>
         <Menu.Item key="personalInfo">
-          <a href="http://www.alipay.com/">个人信息</a>
+          <a href="http://www.alipay.com/">个人中心</a>
         </Menu.Item>
         <Menu.Item key="setting">
           <a href="http://www.taobao.com/">设置</a>

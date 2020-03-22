@@ -38,8 +38,11 @@
       box-shadow: 0 4px 16px 0 rgba(154, 154, 154, 0.5);
       border-radius: 4px;
       cursor: pointer;
-      img {
+      .declareImg {
         height: 177px;
+        width: 100%;
+        background-size: 100% 100%;
+        transition: all 0.5s ease;
       }
       .declareCardTxt {
         flex: 1;
@@ -55,6 +58,11 @@
             font-size: 16px;
           }
         }
+      }
+    }
+    .declareCard:hover {
+      .declareImg {
+        background-size: 110% 110%;
       }
     }
   }
