@@ -6,13 +6,16 @@
   display: flex;
   .leftMenuSider {
     background: #f0f2f5;
-    height: 100vh;
     .leftMenuBox {
       display: flex;
       flex-direction: column;
       width: 160px;
-      color: rgba(0, 0, 0, 0.5);
+      min-height: 100vh;
       max-height: 100vh;
+      padding: 20px 0 40px 0;
+      color: rgba(0, 0, 0, 0.5);
+      overflow-x: hidden;
+      overflow-y: auto;
       .preMenu {
         color: rgba(0, 0, 0, 0.5);
         text-align: center;
@@ -28,7 +31,8 @@
       }
     }
   }
-  .ant-layout-content {
-    background: #ffffff;
+  .leftMenuSider > div,
+  .leftMenuSider > div > div {
+    height: 100%;
   }
 }

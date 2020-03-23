@@ -24,20 +24,20 @@ export default function Template(props) {
   }
 
   return (
-    <Layout className="leftMenuTemplateBox">
-      <Sider className="leftMenuSider" width={160}>
+    <div className="leftMenuTemplateBox">
+      <div className="leftMenuSider" width={160}>
         <Affix offsetTop={0}>
           <nav className="leftMenuBox">{leftMenu}</nav>
         </Affix>
-      </Sider>
-      <Content style={{ flex: 1 }}>
+      </div>
+      <div style={{ flex: 1 }}>
         <Switch>
           <Redirect exact from={match.path} to={`${match.path}${getRedirectPath(routerConfig)}`} />
           {rightContent}
           <Route component={RedirectTo404} />
         </Switch>
         <Footer />
-      </Content>
-    </Layout>
+      </div>
+    </div>
   );
 }
