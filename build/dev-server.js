@@ -2,10 +2,10 @@ const WebpackDevServer = require("webpack-dev-server");
 const webpack = require("webpack");
 const path = require("path"); // 引入nodejs路径模块，处理路径用的
 
-const webpackConfig = require("./build/webpack.dev.conf.js");
+const webpackConfig = require("./webpack.dev.conf.js");
 
 const devServerOptions = {
-  contentBase: path.join(__dirname, "./"), // 最好设置成绝对路径
+  contentBase: path.join(__dirname, "../"), // 最好设置成绝对路径
   publicPath: "/",
   historyApiFallback: true, // true默认打开index.html，false会出现一个目录，亦可配置
   hot: true, // 启用模块热替换特性
@@ -31,7 +31,7 @@ WebpackDevServer.addDevServerEntrypoints(webpackConfig, devServerOptions);
 const compiler = webpack(webpackConfig);
 const server = new WebpackDevServer(compiler, devServerOptions);
 
-const portConfig = require("./port.json");
+const portConfig = require("../port.json");
 server.listen(portConfig.data.port, "localhost", () => {
   console.log(`
     dev server listening on port ${portConfig.data.port}
